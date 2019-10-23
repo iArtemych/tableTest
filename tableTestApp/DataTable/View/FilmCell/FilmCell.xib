@@ -120,6 +120,7 @@
             <connections>
                 <outlet property="actors" destination="Fxt-zH-myC" id="Epz-CF-AAx"/>
                 <outlet property="age" destination="fdt-eB-EkS" id="cu6-gb-Z4P"/>
+                <outlet property="backgroudView" destination="y3X-FY-pdL" id="yIb-vQ-hAo"/>
                 <outlet property="countries" destination="tAB-Nc-3vD" id="3s2-xB-Rqc"/>
                 <outlet property="created" destination="vfw-gk-Bmq" id="xtR-No-15n"/>
                 <outlet property="duration" destination="Mbe-hV-RIL" id="ECW-tW-Qs3"/>

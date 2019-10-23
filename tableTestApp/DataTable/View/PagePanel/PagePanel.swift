@@ -39,6 +39,7 @@ class PagePanel: UIView {
     
     //MARK: - Methods
     func setupNumPad(page: Int, maxPage: Int) {
+        var pageArray: [Int] = [1, 2, 3, 4, 5]
         
         let prevPage = page - 1
         let nextPage = page + 1
@@ -50,83 +51,56 @@ class PagePanel: UIView {
             for i in 0..<maxPage {
                 numButtons[i].isEnabled = true
             }
-        }
-        else {
+        } else {
             for button in numButtons {
                 button.isEnabled = true
             }
         }
-        // TODO: - Swich in method
+        
         if page > 3 {
-            
             if page < maxPage - 2 {
-                for (index, button) in numButtons.enumerated() {
-                    
+                for index in 0 ..< numButtons.count {
                     switch index {
-                    case 0:
-                        button.setTitle("1", for: .normal)
-                        button.tag = 1
-                    case 1:
-                        button.setTitle("\(prevPage)", for: .normal)
-                        button.tag = prevPage
-                    case 2:
-                        button.setTitle("\(page)", for: .normal)
-                        button.tag = page
-                    case 3:
-                        button.setTitle("\(nextPage)", for: .normal)
-                        button.tag = nextPage
-                    case 4:
-                        button.setTitle("\(maxPage)", for: .normal)
-                        button.tag = maxPage
-                    default:
-                        fatalError()
+                    case 0: pageArray[index] = 1
+                    case 1: pageArray[index] = prevPage
+                    case 2: pageArray[index] = page
+                    case 3: pageArray[index] = nextPage
+                    case 4: pageArray[index] = maxPage
+                    default: fatalError()
                     }
                 }
             } else {
-                for (index, button) in numButtons.enumerated() {
-                    
+                for index in 0 ..< numButtons.count {
                     switch index {
-                    case 0:
-                        button.setTitle("1", for: .normal)
-                        button.tag = 1
-                    case 1:
-                        button.setTitle("\(maxPage - 3)", for: .normal)
-                        button.tag = maxPage - 3
-                    case 2:
-                        button.setTitle("\(maxPage - 2)", for: .normal)
-                        button.tag = maxPage - 2
-                    case 3:
-                        button.setTitle("\(maxPage - 1)", for: .normal)
-                        button.tag = maxPage - 1
-                    case 4:
-                        button.setTitle("\(maxPage)", for: .normal)
-                        button.tag = maxPage
-                    default:
-                        fatalError()
+                    case 0: pageArray[index] = 1
+                    case 1: pageArray[index] = maxPage - 3
+                    case 2: pageArray[index] = maxPage - 2
+                    case 3: pageArray[index] = maxPage - 1
+                    case 4: pageArray[index] = maxPage
+                    default: fatalError()
                     }
                 }
             }
         } else {
-            for (index, button) in numButtons.enumerated() {
+            for index in 0 ..< numButtons.count - 1 {
                 
-                button.setTitle("\(index + 1)", for: .normal)
-                button.tag = index + 1
-                if index == 4 {
-                    button.setTitle("\(maxPage)", for: .normal)
-                    button.tag = maxPage
-                }
+                pageArray[index] = index + 1
             }
+            pageArray[4] = maxPage
+        }
+        
+        for (index, button) in numButtons.enumerated() {
+            
+            button.setTitle("\(pageArray[index])", for: .normal)
+            button.tag = pageArray[index]
         }
         
         for button in numButtons {
             
             if button.tag == page {
-                
                 button.layer.borderWidth = 2
                 button.layer.borderColor = .init(srgbRed: 58, green: 129, blue: 241, alpha: 1)
-                
             } else {
-                
                 button.layer.borderWidth = 0
             }
         }

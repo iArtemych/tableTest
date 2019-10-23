@@ -25,6 +25,7 @@
 		3C663E7C2359C4150017B30A /* Films.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C663E7B2359C4150017B30A /* Films.swift */; };
 		3C663E7F2359D4870017B30A /* FilmCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C663E7E2359D4860017B30A /* FilmCell.xib */; };
 		3C663E812359D4AE0017B30A /* FilmCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C663E802359D4AE0017B30A /* FilmCell.swift */; };
+		3C973B76235DD049003A5EA4 /* FilmsResponce.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C973B75235DD049003A5EA4 /* FilmsResponce.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +49,7 @@
 		3C663E7B2359C4150017B30A /* Films.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Films.swift; sourceTree = "<group>"; };
 		3C663E7E2359D4860017B30A /* FilmCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FilmCell.xib; sourceTree = "<group>"; };
 		3C663E802359D4AE0017B30A /* FilmCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmCell.swift; sourceTree = "<group>"; };
+		3C973B75235DD049003A5EA4 /* FilmsResponce.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmsResponce.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -168,6 +170,7 @@
 			isa = PBXGroup;
 			children = (
 				3C663E7B2359C4150017B30A /* Films.swift */,
+				3C973B75235DD049003A5EA4 /* FilmsResponce.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -282,6 +285,7 @@
 				3C663E672359AFE10017B30A /* MainView.swift in Sources */,
 				3C1B1FA1235A0086007F3E6A /* PagePanelDelegate.swift in Sources */,
 				3C663E692359B39A0017B30A /* DataTableViewCell.swift in Sources */,
+				3C973B76235DD049003A5EA4 /* FilmsResponce.swift in Sources */,
 				3C1B1FA5235A5A54007F3E6A /* MainTableViewControllerPages.swift in Sources */,
 				3C663E532359AE660017B30A /* AppDelegate.swift in Sources */,
 				3C663E552359AE660017B30A /* SceneDelegate.swift in Sources */,

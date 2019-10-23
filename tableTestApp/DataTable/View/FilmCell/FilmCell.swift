@@ -21,5 +21,6 @@ class FilmCell: UIView {
     @IBOutlet weak var genres: UILabel!
     @IBOutlet weak var actors: UILabel!
     @IBOutlet weak var fimDescription: UILabel!
-
+    @IBOutlet weak var backgroudView: UIView!
+    
 }

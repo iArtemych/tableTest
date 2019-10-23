@@ -11,6 +11,7 @@ import UIKit
 class MainTableViewController: UIViewController {
     
     //MARK: - Constants
+    let filmsResponce = FilmsResponce()
     
     //MARK: - Variables
     private var filmsArray: [Films] = []
@@ -21,7 +22,9 @@ class MainTableViewController: UIViewController {
             filmListFrommArray()
         }
     }
-    var maxPage = 0
+    private var maxPage = 0
+    var rowHeight: CGFloat = 414.0
+    
     //MARK: - Outlets
     @IBOutlet var mainView: MainView!
     
@@ -34,7 +37,8 @@ class MainTableViewController: UIViewController {
         mainView.pagePanel.delegate = self
         mainView.dataTable.register(DataTableViewCell.self, forCellReuseIdentifier: "dataCell")
         
-        getData()
+        filmsArray = filmsResponce.getData()
+        
         pageCount()
         mainView.pagePanel.setupNumPad(page: 1, maxPage: maxPage)
         filmListFrommArray()
@@ -48,7 +52,6 @@ class MainTableViewController: UIViewController {
         } else {
             maxPage = filmsArray.count / 10 + 1
         }
-
     }
     
     private func filmListFrommArray() {
@@ -64,77 +67,36 @@ class MainTableViewController: UIViewController {
         mainView.dataTable.scroll(to: .top, animated: true)
         mainView.dataTable.reloadData()
     }
-    
-    private func getData() {
-        
-        let data: Data
-        
-        guard let file = Bundle.main.url(forResource: "jsonFilms.json", withExtension: nil)
-            else {
-                fatalError("Couldn't find jsonFilms in main bundle.")
-        }
-        
-        do {
-            data = try Data(contentsOf: file)
-        } catch {
-            fatalError("Couldn't load jsonFilms from main bundle")
-        }
-        
-        do {
-            let decoder = JSONDecoder()
-            let films = try decoder.decode([Films].self, from: data)
-            filmsArray = films
-        } catch {
-            fatalError("Couldn't parse jsonFilms as")
-        }
-        
-    }
-
 }
+
 
 extension MainTableViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        
+        let maxFilmCount = 10
+        
+        return maxFilmCount
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "dataCell", for: indexPath) as! DataTableViewCell
-        
-        for view in cell.contentView.subviews {
-            view.removeFromSuperview()
-        }
-        
-        var cellView: FilmCell!
-        cellView = FilmCell.loadFromNib()
-        cell.contentView.addSubview(cellView)
-        cellView.translatesAutoresizingMaskIntoConstraints = false
-
-        if let cellData = cellView {
-
-            let verticalSpaceTop = NSLayoutConstraint(item: cellData, attribute: .top, relatedBy: .equal, toItem: cell, attribute: .top, multiplier: 1, constant: 0)
-            let verticalSpaceBottom = NSLayoutConstraint(item: cellData, attribute: .bottom, relatedBy: .equal, toItem: cell, attribute: .bottom, multiplier: 1, constant: 0)
-            let horisontalSpaceTrailing = NSLayoutConstraint(item: cellData, attribute: .trailing, relatedBy: .equal, toItem: cell, attribute: .trailing, multiplier: 1, constant: 0)
-            let horisontalSpaceLeading = NSLayoutConstraint(item: cellData, attribute: .leading, relatedBy: .equal, toItem: cell, attribute: .leading, multiplier: 1, constant: 0)
-
-            NSLayoutConstraint.activate([verticalSpaceTop, verticalSpaceBottom, horisontalSpaceLeading, horisontalSpaceTrailing])
-        }
-        
         let film = selectedArray[indexPath.row]
-        cell.setupCell(name: film.name, duration: film.duration, countries: film.countries, age: film.age, year: film.year, created: film.created, favorites: film.favorites, genres: film.genres, actors: film.actors, description: film.description, cellView: cellView)
+        var cellView: FilmCell!
+        
+        cell.setupCell(film: film, cellView: &cellView)
         
         return cell
     }
-    
-    
 }
 
 extension MainTableViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        return 414
+        
+        return rowHeight
     }
     
 }
